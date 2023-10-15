@@ -10,7 +10,7 @@ using namespace std;
 
 bool quitProgram;
 
-string txtTemplate[5];
+string txtTemplate[6];
 
 void InitializeTxtTemplate() {
 	txtTemplate[0] = "Nazwa: ";
@@ -31,7 +31,7 @@ void InitializeMainScript() {
 	cout << "Changed 'quitProgram' to 0" << endl;;
 	InitializeTxtTemplate();
 	InitializeRandomComponent();
-	SetConsoleTitle((LPCSTR)"Hi");
+	//SetConsoleTitleA("Hi");
 }
 
 int GenerateRandomInt()
@@ -102,11 +102,11 @@ int main()
 			for (int i = 0; i < count; i++) {
 				WriteToConsoleMatrixModeBlock();
 
-				SetConsoleTitle((LPCSTR)"I'm sorry friend :C. No live window title. I hope you like games!");
+				//SetConsoleTitle((LPCWSTR)"I'm sorry friend :C. No live window title. I hope you like games!");
 			}
 
 			cout << GenerateRandomInt() << endl;
-			SetConsoleTitle("Hi");
+			//SetConsoleTitle((LPCWSTR)"Hi");
 		}
 		else if (anwser == 1) 
 		{
