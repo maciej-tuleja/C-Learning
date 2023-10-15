@@ -8,8 +8,6 @@
 
 using namespace std;
 
-bool quitProgram;
-
 string txtTemplate[6];
 
 void InitializeTxtTemplate() {
@@ -27,25 +25,8 @@ void InitializeRandomComponent()
 }
 
 void InitializeMainScript() {
-	quitProgram = false;
-	cout << "Changed 'quitProgram' to 0" << endl;;
 	InitializeTxtTemplate();
 	InitializeRandomComponent();
-	//SetConsoleTitleA("Hi");
-}
-
-int GenerateRandomInt()
-{
-	int result = 0;
-	int random;
-
-	
-	random = rand() % 10 + 1;
-
-
-	result = random;
-
-	return result;
 }
 
 void WriteTemplatesToTxtFile(int count) 
@@ -70,13 +51,15 @@ void WriteTemplatesToTxtFile(int count)
 	cout << "Succesfully ended saving file" << endl;
 }
 
-void WriteToConsoleMatrixModeBlock()
+void WriteToConsoleMatrixModeBlock(int t)
 {
 	int matrixLine = 1000;
-	
-	for (int i = 0; i < matrixLine-1; i++)
+	for(int j = 0; j < t;j++)
 	{
-		cout << GenerateRandomInt();
+		for (int i = 0; i < matrixLine; i++)
+		{
+			cout << rand() % 10 + 1;
+		}
 	}
 }
 
@@ -84,48 +67,34 @@ int main()
 {
 	InitializeMainScript();
 
-	while (!quitProgram) {
-		cout << quitProgram << endl;
-		cout << "Write 0 or something else To Exit" << endl;
+	int tempCount;
+	while (true) {
+		cout << "Write 0 To Exit" << endl;
 		cout << "Write 1 To Save Templates To txt File" << endl;
 		cout << "Write 2 To Show Matrix Mode" << endl;
-		int anwser;
 
+		int anwser;
 		cin >> anwser;
+
+		if(anwser == 0) { return 0; }
 		if (anwser == 2) {
 			cout << "How many matrix blocks do you want to have? " << endl;
 
-			int count;
+			cin >> tempCount;
 
-			cin >> count;
+			WriteToConsoleMatrixModeBlock(tempCount);
 
-			for (int i = 0; i < count; i++) {
-				WriteToConsoleMatrixModeBlock();
-
-				//SetConsoleTitle((LPCWSTR)"I'm sorry friend :C. No live window title. I hope you like games!");
-			}
-
-			cout << GenerateRandomInt() << endl;
-			//SetConsoleTitle((LPCWSTR)"Hi");
+			cout << endl;
 		}
 		else if (anwser == 1) 
 		{
 			cout << "How many templates you want to save to the .txt file? " << endl;
 
-			int count;
+			cin >> tempCount;
 
-			cin >> count;
-			
-			WriteTemplatesToTxtFile(count);
+			WriteTemplatesToTxtFile(tempCount);
 		}
-		else if (anwser == 0) {
-			quitProgram = true;
-		}
-		else 
-		{
-			cout << "Invalid format" << endl;
-		}
-
+		else { cout << "Invalid format" << endl; }
 	}
 
 	return 0;
